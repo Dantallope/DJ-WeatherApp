@@ -1,73 +1,54 @@
 const cityEl = document.getElementById("cityEl")
 const stateEl = document.getElementById("stateEl")
+
 document
     .getElementById('getLocationLink')
     .addEventListener('click', findCity);
 
-    function findCity() {
-        console.log(stateEl.value)
-        let state = stateEl.value;
-        let name = cityEl.value;
-        let limit = '5'
-        let key = '890c3bde92eb251b023ba65f63eb1c36';
-        let url = `http://api.openweathermap.org/geo/1.0/direct?q=${name},${state},&limit=${limit}&appid=${key}`
-        console.log(url);
-        fetch(url)
+function findCity() {
+    console.log(stateEl.value)
+    let state = stateEl.value;
+    let name = cityEl.value;
+    let limit = '5'
+    let key = '890c3bde92eb251b023ba65f63eb1c36';
+    let url = `http://api.openweathermap.org/geo/1.0/direct?q=${name},${state},&limit=${limit}&appid=${key}`
+    fetch(url)
+        .then(resp => {
+            if (!resp.ok) throw new Error(resp.statusText);
+            return resp.json();
+        })
+        .then(data => {
+            getWeather(data)
+        })
+        .catch(console.err);
+}
+function getWeather(data) {
+    const latt = data[0].lat
+    const lonn = data[0].lon
+    let key = '890c3bde92eb251b023ba65f63eb1c36';
+    let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latt}&lon=${lonn}&appid=${key}`
+    console.log(url)
+
+    fetch(url)
             .then(resp => {
                 if (!resp.ok) throw new Error(resp.statusText);
                 return resp.json();
             })
             .then(data => {
-                console.log(data[0].lat, data[0].lon)
+               showWeather(data);
             })
             .catch(console.err);
     }
+    function showWeather(data){
+       document.getElementById("cTitle").innerHTML = data.city.name+' '+  moment().format('M/D/YY');
+       console.log(data)
 
+        console.log(data.list[0].weather[0].description)
+        console.log(data.list[1].weather)
+        console.log(data.list[6].weather)
+        console.log(data.list[14].weather)
+        console.log(data.list[22].weather)
+        console.log(data.list[30].weather)
 
-
-
-    
-/*
-const app = {
-    init: () => {
-
-        document
-            .getElementById('getLocationLink')
-            .addEventListener('click', app.fetchPosition);
-    },
-
-    fetchPosition: (ev) => {
-        let state = 'CA'
-        let name = 'roseville'
-        let limit = '5'
-        let key = '890c3bde92eb251b023ba65f63eb1c36';
-        let url = `http://api.openweathermap.org/geo/1.0/direct?q=${name},${state},&limit=${limit}&appid=${key}`
-        console.log(url);
-        fetch(url)
-            .then(resp => {
-                if (!resp.ok) throw new Error(resp.statusText);
-                return resp.json();
-            })
-            .then(data => {
-                console.log(data)
-            })
-            .catch(console.err);
-    },
-    getLocation:(ev)=>{
-
-    },
-}
-let name2 = 'roseville'
-let state2 = 'CA'
-let limit2 = '5'
-let key2 = '890c3bde92eb251b023ba65f63eb1c36'
-let url2 = `http://api.openweathermap.org/geo/1.0/direct?q=${name2},${state2},&limit=${limit2}&appid=${key2}`
-fetch(url2).then(resp => {
-    if (!resp.ok) throw new Error(resp.statusText);
-    return resp.json();
-})
-.then(data => {
-    console.log(data)
-})
-.catch(console.err);
-*/
+    }
+    console.log(moment().add(1,'days').format('M/D/YY'))
