@@ -3,6 +3,11 @@ const stateEl = document.getElementById("stateEl")
 
 var oldData;
 
+document
+.getElementById('reset')
+.addEventListener('click',function(){
+    localStorage.clear();
+})
 
 document
     .getElementById('getLocationLink')
