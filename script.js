@@ -26,7 +26,7 @@ function getWeather(data) {
     const latt = data[0].lat
     const lonn = data[0].lon
     let key = '890c3bde92eb251b023ba65f63eb1c36';
-    let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latt}&lon=${lonn}&appid=${key}`
+    let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latt}&lon=${lonn}&appid=${key}&units=imperial`
     console.log(url)
 
     fetch(url)
@@ -40,10 +40,16 @@ function getWeather(data) {
             .catch(console.err);
     }
     function showWeather(data){
+    
        document.getElementById("cTitle").innerHTML = data.city.name+' '+  moment().format('M/D/YY');
-       console.log(data)
+       document.getElementById('demo').src = 'http://openweathermap.org/img/wn/10d@2x.png'
+       document.getElementById("cTemp").innerHTML = data.list[0].main.temp + '°F';
+       document.getElementById("cWind").innerHTML = data.list[0].wind.speed + 'MPH';
+       document.getElementById("cHum").innerHTML = data.list[0].main.humidity + '%';
 
-        console.log(data.list[0].weather[0].description)
+      
+
+        console.log(data.list[0])
         console.log(data.list[1].weather)
         console.log(data.list[6].weather)
         console.log(data.list[14].weather)
