@@ -1,12 +1,17 @@
 const cityEl = document.getElementById("cityEl")
 const stateEl = document.getElementById("stateEl")
 
+var oldData;
+
+
 document
     .getElementById('getLocationLink')
     .addEventListener('click', findCity);
 
 function findCity() {
     console.log(stateEl.value)
+localStorage.setItem(cityEl.value,stateEl.value)
+
     let state = stateEl.value;
     let name = cityEl.value;
     let limit = '5'
@@ -76,14 +81,43 @@ function showWeather(data) {
     document.getElementById("temp5").innerHTML = data.list[30].main.temp + '°F';
     document.getElementById("wind5").innerHTML = data.list[30].wind.speed + 'MPH';
     document.getElementById("hum5").innerHTML = data.list[30].main.humidity + '%';
-
-
-
-    console.log(data.list[0])
-    console.log(data.list[1])
-    console.log(data.list[6].weather)
-    console.log(data.list[14].weather)
-    console.log(data.list[22].weather)
-    console.log(data.list[30].weather)
-
 }
+var temp = document.getElementById("history");
+
+for(i=0; i < localStorage.length; i++){
+    const key = localStorage.key(i);
+    const value = localStorage.getItem(key);
+
+    let hisEl = document.createElement('div');
+    hisEl.textContent = `${key} in ${value}`
+    temp.appendChild(hisEl);
+    console.log(`You its ${key} in ${value}`)
+
+    hisEl.addEventListener("click", function(){
+        oldData = hisEl.textContent
+        getWeatherHist()
+        
+    })
+}
+    function getWeatherHist(){
+        const newData = oldData.split(" ") 
+        console.log(newData[0])
+
+        let state = newData[2];
+        let name = newData[0];
+        let limit = '5'
+        let key = '890c3bde92eb251b023ba65f63eb1c36';
+        let url = `http://api.openweathermap.org/geo/1.0/direct?q=${name},${state},&limit=${limit}&appid=${key}`
+        fetch(url)
+            .then(resp => {
+                if (!resp.ok) throw new Error(resp.statusText);
+                return resp.json();
+            })
+            .then(data => {
+                getWeather(data)
+            })
+            .catch(console.err);
+
+    }
+
+
