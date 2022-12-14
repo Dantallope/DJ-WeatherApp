@@ -21,7 +21,7 @@ localStorage.setItem(cityEl.value,stateEl.value)
     let name = cityEl.value;
     let limit = '5'
     let key = 'eb59b50e0e30a1cc46621466e7ca7e1c';
-    let url = `http://api.openweathermap.org/geo/1.0/direct?q=${name},${state},&limit=${limit}&appid=${key}`
+    let url = `https://api.openweathermap.org/geo/1.0/direct?q=${name},${state},&limit=${limit}&appid=${key}`
     fetch(url)
         .then(resp => {
             if (!resp.ok) throw new Error(resp.statusText);
@@ -52,37 +52,37 @@ function getWeather(data) {
 function showWeather(data) {
     //Imputing current weather data into the "current" HTML card
     document.getElementById("cTitle").innerHTML = data.city.name + ' ' + moment().format('M/D/YY');
-    document.getElementById('demo').src = 'http://openweathermap.org/img/wn/' + data.list[0].weather[0].icon + '@2x.png'
+    document.getElementById('demo').src = 'https://openweathermap.org/img/wn/' + data.list[0].weather[0].icon + '@2x.png'
     document.getElementById("cTemp").innerHTML = 'Temp: '+data.list[0].main.temp + '°F';
     document.getElementById("cWind").innerHTML = 'Wind: '+data.list[0].wind.speed + 'MPH';
     document.getElementById("cHum").innerHTML = 'Humidity: '+data.list[0].main.humidity + '%';
     // One day ahead
     document.getElementById("date1").innerHTML = moment().add(1, 'days').format('M/D/YY');
-    document.getElementById('icon1').src = 'http://openweathermap.org/img/wn/' + data.list[1].weather[0].icon + '@2x.png'
+    document.getElementById('icon1').src = 'https://openweathermap.org/img/wn/' + data.list[1].weather[0].icon + '@2x.png'
     document.getElementById("temp1").innerHTML = 'Temp: '+data.list[1].main.temp + '°F';
     document.getElementById("wind1").innerHTML = 'Wind: '+data.list[1].wind.speed + 'MPH';
     document.getElementById("hum1").innerHTML = 'Humidity: '+data.list[1].main.humidity + '%';
     // Two days ahead
     document.getElementById("date2").innerHTML = moment().add(2, 'days').format('M/D/YY');
-    document.getElementById('icon2').src = 'http://openweathermap.org/img/wn/' + data.list[6].weather[0].icon + '@2x.png'
+    document.getElementById('icon2').src = 'https://openweathermap.org/img/wn/' + data.list[6].weather[0].icon + '@2x.png'
     document.getElementById("temp2").innerHTML = 'Temp: '+data.list[6].main.temp + '°F';
     document.getElementById("wind2").innerHTML = 'Wind: '+data.list[6].wind.speed + 'MPH';
     document.getElementById("hum2").innerHTML = 'Humidity: '+data.list[6].main.humidity + '%';
     // Three days ahead
     document.getElementById("date3").innerHTML = moment().add(3, 'days').format('M/D/YY');
-    document.getElementById('icon3').src = 'http://openweathermap.org/img/wn/' + data.list[14].weather[0].icon + '@2x.png'
+    document.getElementById('icon3').src = 'https://openweathermap.org/img/wn/' + data.list[14].weather[0].icon + '@2x.png'
     document.getElementById("temp3").innerHTML = 'Temp: '+data.list[14].main.temp + '°F';
     document.getElementById("wind3").innerHTML = 'Wind: '+data.list[14].wind.speed + 'MPH';
     document.getElementById("hum3").innerHTML = 'Humidity: '+data.list[14].main.humidity + '%';
     // Four days ahead
     document.getElementById("date4").innerHTML = moment().add(4, 'days').format('M/D/YY');
-    document.getElementById('icon4').src = 'http://openweathermap.org/img/wn/' + data.list[22].weather[0].icon + '@2x.png'
+    document.getElementById('icon4').src = 'https://openweathermap.org/img/wn/' + data.list[22].weather[0].icon + '@2x.png'
     document.getElementById("temp4").innerHTML = 'Temp: '+data.list[22].main.temp + '°F';
     document.getElementById("wind4").innerHTML = 'Wind: '+data.list[22].wind.speed + 'MPH';
     document.getElementById("hum4").innerHTML = 'Humidity: '+data.list[22].main.humidity + '%';
     // Five days ahead
     document.getElementById("date5").innerHTML = moment().add(5, 'days').format('M/D/YY');
-    document.getElementById('icon5').src = 'http://openweathermap.org/img/wn/' + data.list[30].weather[0].icon + '@2x.png'
+    document.getElementById('icon5').src = 'https://openweathermap.org/img/wn/' + data.list[30].weather[0].icon + '@2x.png'
     document.getElementById("temp5").innerHTML = 'Temp: '+data.list[30].main.temp + '°F';
     document.getElementById("wind5").innerHTML = 'Wind: '+data.list[30].wind.speed + 'MPH';
     document.getElementById("hum5").innerHTML = 'Humidity: '+data.list[30].main.humidity + '%';
@@ -112,7 +112,7 @@ for(i=0; i < localStorage.length; i++){
         let name = newData[0];
         let limit = '5'
         let key = '890c3bde92eb251b023ba65f63eb1c36';
-        let url = `http://api.openweathermap.org/geo/1.0/direct?q=${name},${state},&limit=${limit}&appid=${key}`
+        let url = `https://api.openweathermap.org/geo/1.0/direct?q=${name},${state},&limit=${limit}&appid=${key}`
         fetch(url)
             .then(resp => {
                 if (!resp.ok) throw new Error(resp.statusText);
