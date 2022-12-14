@@ -111,7 +111,7 @@ for(i=0; i < localStorage.length; i++){
         let state = newData[1];
         let name = newData[0];
         let limit = '5'
-        let key = 'eb59b50e0e30a1cc46621466e7ca7e1c';
+        let key = '890c3bde92eb251b023ba65f63eb1c36';
         let url = `http://api.openweathermap.org/geo/1.0/direct?q=${name},${state},&limit=${limit}&appid=${key}`
         fetch(url)
             .then(resp => {
