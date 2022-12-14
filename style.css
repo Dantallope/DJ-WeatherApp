@@ -1,4 +1,28 @@
+* {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
 #demo{
-    width: 50px;
-    height: 50px;
+   width: 100px;
+}
+#icon1,#icon2,#icon3,#icon4,#icon5{
+    width: 100px;
+}
+#history{
+    text-align: center;
+}
+#history div{
+    margin: 5px;
+    border: solid black;
+    border-radius: 5px;
+    background-color: lightpink;
+}
+#history div:hover{
+    cursor: pointer;
+    background-color: pink;
+}
+#userIn{
+    margin-left: 20px;
+}
+#stBtn{
+    margin-top: 5px;
 }
